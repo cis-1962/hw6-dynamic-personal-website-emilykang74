@@ -1,6 +1,6 @@
 {
   "root": true,
-  "env": { "browser": true, "es2020": true },
+  "env": {}, // CONFIGURE THIS FOR YOUR PROJECT!
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -10,18 +10,15 @@
     "prettier"
   ],
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "project": ["./tsconfig.json", "./tsconfig.node.json"],
+    "ecmaVersion": 2020, // CONFIGURE THIS FOR YOUR PROJECT!
+    "project": "./tsconfig.json",
     "tsconfigRootDir": "."
   },
-  "plugins": ["unicorn", "react-refresh"],
+  "plugins": ["unicorn"],
   "rules": {
     // syntax rules
     "consistent-return": "off",
     "no-lonely-if": "error",
-    "no-param-reassign": "off",
-
-    // import
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -32,8 +29,6 @@
         "tsx": "never"
       }
     ],
-
-    // typescript
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-use-before-define": [
@@ -58,13 +53,6 @@
     "unicorn/error-message": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-lonely-if": "error",
-    "unicorn/prefer-ternary": "error",
-
-    // vite
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ]
-  },
-  "ignorePatterns": ["/*.js"]
+    "unicorn/prefer-ternary": "error"
+  }
 }

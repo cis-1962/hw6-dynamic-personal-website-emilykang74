@@ -1,39 +1,47 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface Post {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
+export interface PostInfo {
+    id: number,
+    title: string,
+    imageUrl: string,
+    description: string
 }
 
-interface PostsState {
-  posts: Post[];
+export interface PostsState {
+    id: number,
+    posts: PostInfo[]
 }
 
 const initialState: PostsState = {
-  posts: [],
-};
+    id: 1,
+    posts: []
+}
 
-const postsSlice = createSlice({
-  name: 'posts',
-  initialState,
-  reducers: {
-    addPost: (state, action: PayloadAction<Post>) => {
-      state.posts.push(action.payload);
-    },
-    deletePost: (state, action: PayloadAction<string>) => {
-      state.posts = state.posts.filter((post) => post.id !== action.payload);
-    },
-    updatePost: (state, action: PayloadAction<Post>) => {
-      const index = state.posts.findIndex((post) => post.id === action.payload.id);
-      if (index !== -1) {
-        state.posts[index] = action.payload;
-      }
-    },
-  },
-});
+export const postsSlice = createSlice({
+    name: 'posts',
+    initialState,
+    reducers: {
+        addPost: (state, action: PayloadAction<string[]>) => {
+            const [title, url, desc] = action.payload;
+            state.posts.push({
+                id: state.id,
+                title,
+                imageUrl: url,
+                description: desc,
+            })
+            state.id += 1;
+        },
+        removePost: (state, action: PayloadAction<number>) => {
+            state.posts = state.posts.filter((post) => post.id !== action.payload);
+        },
+        updatePost: (state, action: PayloadAction<PostInfo>) => {
+            const updated = action.payload;
+            state.posts = state.posts.map((post) => post.id === updated.id ? updated : post)
+        }
+    }
+})
 
-export const { addPost, deletePost, updatePost } = postsSlice.actions;
-export const selectPosts = (state: { posts: PostsState }) => state.posts.posts;
+export const { addPost, removePost, updatePost } = postsSlice.actions;
+
 export default postsSlice.reducer;

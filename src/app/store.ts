@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import introductionReducer from '../features/introductionSlice';
-import postsReducer from '../features/postsSlice';
+import introductionReducer from '../features/IntroductionSlice';
+import postsReducer from '../features/PostsSlice';
 
-const store = configureStore({
-  reducer: {
-    introduction: introductionReducer,
-    posts: postsReducer,
-  },
+export const store = configureStore({
+    reducer: {
+        introduction: introductionReducer,
+        posts: postsReducer,
+    }
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = ReturnType<typeof store.dispatch>;

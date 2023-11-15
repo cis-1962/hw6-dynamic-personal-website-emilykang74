@@ -1,26 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface IntroductionState {
-  image: string;
-  description: string;
+export interface IntroductionState {
+    url: string,
+    description: string
 }
 
-const initialState: IntroductionState = {
-  image: '',
-  description: '',
-};
+const initialState = {
+    url: '',
+    description: '',
+} as IntroductionState
 
-const introductionSlice = createSlice({
-  name: 'introduction',
-  initialState,
-  reducers: {
-    updateIntroduction: (state, action: PayloadAction<IntroductionState>) => {
-      state.image = action.payload.image;
-      state.description = action.payload.description;
-    },
-  },
-});
+export const introductionSlice = createSlice({
+    name: 'introduction',
+    initialState,
+    reducers: {
+        updateIntroduction: (state, action: PayloadAction<string[]>) => {
+            const [url, desc] = action.payload;
+            state.url = url;
+            state.description = desc;
+        }
+    }
+})
 
 export const { updateIntroduction } = introductionSlice.actions;
-export const selectIntroduction = (state: { introduction: IntroductionState }) => state.introduction;
+
 export default introductionSlice.reducer;

@@ -1,20 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from './app/store';
-import Introduction from './components/post-components/Introduction';
-import PostForm from './components/post-components/PostForm';
-import PostList from './components/post-components/PostList';
+import Introduction from "./components/Introduction";
+import Posts from "./components/Posts";
 
-function App() {
+export default function App() {
   return (
-    <Provider store={store}>
-      <div>
-        <Introduction />
-        <PostForm />
-        <PostList />
-      </div>
-    </Provider>
+    <>
+      <Introduction />
+      <Posts />
+    </>
   );
 }
-
-export default App;
